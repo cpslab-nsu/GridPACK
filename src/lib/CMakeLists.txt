@@ -115,6 +115,12 @@ if (GOSS_DIR)
   set(GRIDPACK_APR_LIBRARIES ${APR_LIBRARY})
 endif ()
 
+set(Boost_LIBRARY_PATHS "")
+foreach(lib ${Boost_LIBRARIES})
+  get_property(lib_path TARGET ${lib} PROPERTY LOCATION)
+  list(APPEND Boost_LIBRARY_PATHS ${lib_path})
+endforeach()
+
 configure_file(${CMAKE_CURRENT_SOURCE_DIR}/GridPACK.cmake.in 
   ${CMAKE_CURRENT_BINARY_DIR}/GridPACK.cmake @ONLY)
 
