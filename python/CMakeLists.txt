@@ -1,6 +1,10 @@
 cmake_minimum_required(VERSION 2.8.12)
 project(gridpack-hadrec)
 
+cmake_policy(SET CMP0057 NEW)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+
 if (DEFINED ENV{RHEL_OPENMPI_HACK})
   add_definitions (-DRHEL_OPENMPI_HACK=1)
 endif()
