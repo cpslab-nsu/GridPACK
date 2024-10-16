@@ -1,4 +1,5 @@
 #include "dsf_app_module.hpp"
+#include <functional>
 #include <iostream>
 #include <string>
 #include <vector>
@@ -423,4 +424,22 @@ void gridpack::dynamic_simulation::DSFullApp::run(double tend)
 void gridpack::dynamic_simulation::DSFullApp::run()
 {
   run(p_sim_time);
+}
+
+/**
+ * Run till end time, invoking a user-defined callback function after each time step
+ */
+void gridpack::dynamic_simulation::DSFullApp::runWithStepHandler(const std::function<void()>& handler)
+{
+  constexpr auto eps = 1e-6;
+  while (p_current_time + eps < p_sim_time) {
+    // Process events
+    handleEvents();
+
+    // advance one step
+    runonestep();
+
+    // invoke the callback function
+    handler();
+  }
 }

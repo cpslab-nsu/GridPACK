@@ -16,6 +16,8 @@
 #ifndef _dsf_app_module_h_
 #define _dsf_app_module_h_
 
+#include <functional>
+
 #include "boost/smart_ptr/shared_ptr.hpp"
 #include "gridpack/network/base_network.hpp"
 #include "gridpack/component/base_component.hpp"
@@ -145,6 +147,11 @@ class DSFullApp
      Run till end time
   **/
   void run();
+
+  /**
+   * Run till end time, invoking a user-defined callback function after each time step
+   */
+  void runWithStepHandler(const std::function<void()>& handler);
 
      
 	/**
